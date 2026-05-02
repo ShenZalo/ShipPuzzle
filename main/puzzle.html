@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/output.css" rel="stylesheet" />
+    <title>Ship Puzzle</title>
+  </head>
+  <body class="bg-blue-300">
+    <!-- Instructions -->
+    <div class="flex flex-col justify-center w-full items-center">
+      <h2 class="text-xl text-center font-bold">
+        Use the 15 clues to figure out the correct information for each ship and
+        then put them into the correct columns.<br />Click on the items in the
+        box below to select them and then click on the correct column on the
+        table at the bottom to place them.
+      </h2>
+    </div>
+    <!-- Selection -->
+    <div class="p-4 border-2 mt-2 mx-4 flex flex-col">
+      <!-- Select Ship Chimney Color -->
+      <div class="flex flex-row w-full justify-between">
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <img
+            src="https://i.ibb.co/Q3CDD427/ship-black.png"
+            alt="ship black"
+            border="0"
+          />
+          <p class="text-sm">Black chimney ship</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <img
+            src="https://i.ibb.co/1tjWh2M9/ship-red.png"
+            alt="ship red"
+            border="0"
+          />
+          <p class="text-sm">Red chimney ship</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <img
+            src="https://i.ibb.co/21pTcYwf/ship-blue.png"
+            alt="ship blue"
+            border="0"
+          />
+          <p class="text-sm">Blue chimney ship</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <img
+            src="https://i.ibb.co/fYCmc5Ph/ship-white.png"
+            alt="ship white"
+            border="0"
+          />
+          <p class="text-sm">White chimney ship</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <img
+            src="https://i.ibb.co/pjQyfqgG/ship-green.png"
+            alt="ship green"
+            border="0"
+          />
+          <p class="text-sm">Green chimney ship</p>
+        </div>
+      </div>
+      <!-- Select Ship Departure Time -->
+      <div class="flex flex-row w-full justify-between mt-5">
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">5.00</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">6.00</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">7.00</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">8.00</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">9.00</p>
+        </div>
+      </div>
+      <!-- Select Ship Country -->
+      <div class="flex flex-row w-full justify-between mt-5">
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">French</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Greek</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Brazillian</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">English</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Spanish</p>
+        </div>
+      </div>
+      <!-- Select Item Each Ship Are Carrying-->
+      <div class="flex flex-row w-full justify-between mt-5">
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Coffee</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Tea</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Cocoa</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Rice</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Corn</p>
+        </div>
+      </div>
+      <!-- Select Ship Destination -->
+      <div class="flex flex-row w-full justify-between mt-5">
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Hamburg</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Genoa</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Manila</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Port Said</p>
+        </div>
+        <div
+          onclick="selectItem(this)"
+          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+        >
+          <p class="text-sm">Marseille</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="w-full">
+      <div class="fixed bottom-6 left-6 z-50">
+        <button
+          class="flex flex-col w-16 items-center hover:scale-110 transition-transform duration-300 cursor-pointer"
+          onclick="location.href = 'instruction.html'"
+        >
+          <img
+            class="scale-x-[-1] w-full"
+            src="https://i.ibb.co/35wVjxkn/icon-next.png"
+          />
+          <p class="text-center">Previous</p>
+        </button>
+      </div>
+      <div class="fixed bottom-6 right-6 z-50">
+        <button
+          class="flex flex-col w-16 items-center hover:scale-110 transition-transform duration-300 cursor-pointer"
+          onclick="location.href = 'puzzle.html'"
+        >
+          <img class="w-full" src="https://i.ibb.co/35wVjxkn/icon-next.png" />
+          <p class="text-center">Next</p>
+        </button>
+      </div>
+    </div>
+  </body>
+  <script src="js/selection.js"></script>
+</html>
