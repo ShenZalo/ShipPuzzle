@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="css/output.css" rel="stylesheet" />
+    <link href="css/answer.css" rel="stylesheet" />
     <title>Ship Puzzle</title>
   </head>
   <body class="bg-blue-300">
@@ -17,202 +18,362 @@
       </h2>
     </div>
     <!-- Selection -->
-    <div class="p-4 border-2 mt-2 mx-4 flex flex-col">
-      <!-- Select Ship Chimney Color -->
-      <div class="flex flex-row w-full justify-between">
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <img
-            src="https://i.ibb.co/Q3CDD427/ship-black.png"
-            alt="ship black"
-            border="0"
-          />
-          <p class="text-sm">Black chimney ship</p>
+    <section id="selection">
+      <h1 class="flex font-extrabold justify-center mt-5">SELECTION</h1>
+      <div class="p-4 border-2 mt-2 mx-4 flex flex-col">
+        <!-- Select Ship Chimney Color -->
+        <div class="flex flex-row w-full justify-between">
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <img
+              src="https://i.ibb.co/Q3CDD427/ship-black.png"
+              alt="ship black"
+              border="0"
+            />
+            <p class="text-sm">Black chimney ship</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <img
+              src="https://i.ibb.co/1tjWh2M9/ship-red.png"
+              alt="ship red"
+              border="0"
+            />
+            <p class="text-sm">Red chimney ship</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <img
+              src="https://i.ibb.co/21pTcYwf/ship-blue.png"
+              alt="ship blue"
+              border="0"
+            />
+            <p class="text-sm">Blue chimney ship</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <img
+              src="https://i.ibb.co/fYCmc5Ph/ship-white.png"
+              alt="ship white"
+              border="0"
+            />
+            <p class="text-sm">White chimney ship</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <img
+              src="https://i.ibb.co/pjQyfqgG/ship-green.png"
+              alt="ship green"
+              border="0"
+            />
+            <p class="text-sm">Green chimney ship</p>
+          </div>
         </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <img
-            src="https://i.ibb.co/1tjWh2M9/ship-red.png"
-            alt="ship red"
-            border="0"
-          />
-          <p class="text-sm">Red chimney ship</p>
+        <!-- Select Ship Departure Time -->
+        <div class="flex flex-row w-full justify-between mt-5">
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">5.00</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">6.00</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">7.00</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">8.00</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">9.00</p>
+          </div>
         </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <img
-            src="https://i.ibb.co/21pTcYwf/ship-blue.png"
-            alt="ship blue"
-            border="0"
-          />
-          <p class="text-sm">Blue chimney ship</p>
+        <!-- Select Ship Country -->
+        <div class="flex flex-row w-full justify-between mt-5">
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">French</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Greek</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Brazillian</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">English</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Spanish</p>
+          </div>
         </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <img
-            src="https://i.ibb.co/fYCmc5Ph/ship-white.png"
-            alt="ship white"
-            border="0"
-          />
-          <p class="text-sm">White chimney ship</p>
+        <!-- Select Item Each Ship Are Carrying-->
+        <div class="flex flex-row w-full justify-between mt-5">
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Coffee</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Tea</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Cocoa</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Rice</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Corn</p>
+          </div>
         </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <img
-            src="https://i.ibb.co/pjQyfqgG/ship-green.png"
-            alt="ship green"
-            border="0"
-          />
-          <p class="text-sm">Green chimney ship</p>
+        <!-- Select Ship Destination -->
+        <div class="flex flex-row w-full justify-between mt-5">
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Hamburg</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Genoa</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Manila</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Port Said</p>
+          </div>
+          <div
+            onclick="selectItem(this)"
+            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
+          >
+            <p class="text-sm">Marseille</p>
+          </div>
         </div>
       </div>
-      <!-- Select Ship Departure Time -->
-      <div class="flex flex-row w-full justify-between mt-5">
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">5.00</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">6.00</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">7.00</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">8.00</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">9.00</p>
-        </div>
-      </div>
-      <!-- Select Ship Country -->
-      <div class="flex flex-row w-full justify-between mt-5">
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">French</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Greek</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Brazillian</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">English</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Spanish</p>
-        </div>
-      </div>
-      <!-- Select Item Each Ship Are Carrying-->
-      <div class="flex flex-row w-full justify-between mt-5">
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Coffee</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Tea</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Cocoa</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Rice</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Corn</p>
-        </div>
-      </div>
-      <!-- Select Ship Destination -->
-      <div class="flex flex-row w-full justify-between mt-5">
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Hamburg</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Genoa</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Manila</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Port Said</p>
-        </div>
-        <div
-          onclick="selectItem(this)"
-          class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-        >
-          <p class="text-sm">Marseille</p>
-        </div>
-      </div>
-    </div>
+    </section>
 
+    <section id="answer" class="p-4 border-2 mt-5 mb-20 mx-4">
+      <h1 class="flex font-extrabold justify-center">ANSWER</h1>
+      <table
+        class="w-full mt-5 table-fixed border-collapse border-2 border-black"
+      >
+        <thead>
+          <tr>
+            <th class="border-2 border-black p-2">Ship</th>
+            <th class="border-2 border-black p-2">Departure Time</th>
+            <th class="border-2 border-black p-2">Country</th>
+            <th class="border-2 border-black p-2">Item</th>
+            <th class="border-2 border-black p-2">Destination</th>
+          </tr>
+        </thead>
+        <tbody id="answer-body">
+          <tr>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+          </tr>
+          <tr>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+          </tr>
+          <tr>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+          </tr>
+          <tr>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+          </tr>
+          <tr>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+            <td
+              class="border-2 border-black h-32 text-center align-middle"
+            ></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="flex flex-row justify-end">
+        <button
+          class="mt-2 border-2 border-black bg-red-600 text-white rounded-2xl p-2 flex flex-row justify-center w-16 items-center hover:scale-110 transition-transform duration-300 cursor-pointer"
+          onclick="clearTable()"
+        >
+          <p class="text-center">Clear</p>
+        </button>
+      </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section id="conclusion" class="mb-10">
+      <div class="text-center font-extrabold text-4xl mt-5">
+        Which ship goes to Port Said? Which ship carries tea?<br />
+        Draw a conclusion!
+      </div>
+
+      <div class="line">
+        <div class="dots" aria-hidden="true"><i></i></div>
+
+        <div class="select-wrap">
+          <select
+            class="select"
+            id="portSaidSelect"
+            aria-label="Ship going to Port Said"
+          >
+            <option value="" selected>-</option>
+            <option value="Greek">Greek ship</option>
+            <option value="French">French ship</option>
+            <option value="English">English ship</option>
+            <option value="Brazilian">Brazilian ship</option>
+            <option value="Spanish">Spanish ship</option>
+          </select>
+          <span class="arrow" aria-hidden="true"></span>
+        </div>
+
+        <div>goes to Port said AND</div>
+
+        <div class="select-wrap">
+          <select class="select" id="teaSelect" aria-label="Ship carrying tea">
+            <option value="" selected>-</option>
+            <option value="Greek">Greek ship</option>
+            <option value="French">French ship</option>
+            <option value="English">English ship</option>
+            <option value="Brazilian">Brazilian ship</option>
+            <option value="Spanish">Spanish ship</option>
+          </select>
+          <span class="arrow" aria-hidden="true"></span>
+        </div>
+
+        <div>carries tea</div>
+      </div>
+
+      <div class="result" id="resultMessage" aria-live="polite"></div>
+    </section>
     <!-- Navigation Buttons -->
     <div class="w-full">
-      <div class="fixed bottom-6 left-6 z-50">
+      <div class="fixed bottom-4 left-6 z-50">
         <button
           class="flex flex-col w-16 items-center hover:scale-110 transition-transform duration-300 cursor-pointer"
           onclick="location.href = 'instruction.html'"
@@ -224,16 +385,17 @@
           <p class="text-center">Previous</p>
         </button>
       </div>
-      <div class="fixed bottom-6 right-6 z-50">
+      <div class="fixed bottom-4 right-6 z-50">
         <button
           class="flex flex-col w-16 items-center hover:scale-110 transition-transform duration-300 cursor-pointer"
-          onclick="location.href = 'answer.html'"
+          onclick="submitAnswer()"
         >
-          <img class="w-full" src="https://i.ibb.co/35wVjxkn/icon-next.png" />
-          <p class="text-center">Next</p>
+          <img class="w-full" src="https://i.ibb.co/tMLr4C8p/icon-done.png" />
+          <p class="text-center">SUBMIT</p>
         </button>
       </div>
     </div>
   </body>
   <script src="js/selection.js"></script>
+  <script src="js/answer.js"></script>
 </html>
