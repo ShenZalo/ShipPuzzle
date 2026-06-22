@@ -1,61 +1,75 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="css/output.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Ship Puzzle</title>
-  </head>
-  <body class="bg-blue-300">
-    <div class="flex flex-col justify-center w-full items-center">
-      <h2 class="text-2xl font-bold">There will be 15 statements.</h2>
-      <h2 class="text-2xl font-bold">
-        From the given statements, solve the puzzlee.
-      </h2>
+    <style>
+        .ocean-sway {
+            display: inline-block;
+            transform-origin: bottom center;
+            animation: oceanFloat 4s ease-in-out infinite;
+        }
+        @keyframes oceanFloat {
+            0%, 100% { transform: translateY(0) rotate(-4deg); }
+            50% { transform: translateY(-8px) rotate(4deg); }
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 min-h-screen py-10">
+    <div class="container max-w-3xl mx-auto px-4">
+        <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-blue-100 text-center">
+            
+            <div class="ocean-sway mb-6 text-indigo-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-puzzle-fill mx-auto" viewBox="0 0 16 16">
+                    <path d="M3.112 3.645A1.5 1.5 0 0 1 4.605 2H7a.5.5 0 0 1 .5.5v.382c0 .696-.497 1.182-.872 1.469a.5.5 0 0 0-.115.118l-.012.025L6.5 4.5v.003l.003.01q.005.015.036.053a.9.9 0 0 0 .27.194C7.09 4.9 7.51 5 8 5c.492 0 .912-.1 1.19-.24a.9.9 0 0 0 .271-.194.2.2 0 0 0 .036-.054l.003-.01v-.008l-.012-.025a.5.5 0 0 0-.115-.118c-.375-.287-.872-.773-.872-1.469V2.5A.5.5 0 0 1 9 2h2.395a1.5 1.5 0 0 1 1.493 1.645L12.645 6.5h.237c.195 0 .42-.147.675-.48.21-.274.528-.52.943-.52.568 0 .947.447 1.154.862C15.877 6.807 16 7.387 16 8s-.123 1.193-.346 1.638c-.207.415-.586.862-1.154.862-.415 0-.733-.246-.943-.52-.255-.333-.48-.48-.675-.48h-.237l.243 2.855A1.5 1.5 0 0 1 11.395 14H9a.5.5 0 0 1-.5-.5v-.382c0-.696.497-1.182.872-1.469a.5.5 0 0 0 .115-.118l.012-.025.001-.006v-.003l-.003-.01a.2.2 0 0 0-.036-.053.9.9 0 0 0-.27-.194C8.91 11.1 8.49 11 8 11s-.912.1-1.19.24a.9.9 0 0 0-.271.194.2.2 0 0 0-.036.054l-.003.01v.002l.001.006.012.025c.016.027.05.068.115.118.375.287.872.773.872 1.469v.382a.5.5 0 0 1-.5.5H4.605a1.5 1.5 0 0 1-1.493-1.645L3.356 9.5h-.238c-.195 0-.42.147-.675.48-.21.274-.528.52-.943.52-.568 0-.947-.447-1.154-.862C.123 9.193 0 8.613 0 8s.123-1.193.346-1.638C.553 5.947.932 5.5 1.5 5.5c.415 0 .733.246.943.52.255.333.48.48.675.48h.238z"/>
+                </svg>
+            </div>
+
+            <h1 class="text-3xl font-extrabold text-gray-800 mb-2">Ship Puzzle</h1>
+            <p class="text-gray-500 mb-8">Solve the 15 statements to reveal the secrets of the port.</p>
+
+            <div class="text-left bg-blue-50 p-6 rounded-2xl border border-blue-200">
+                <p class="text-lg font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2">There are 5 ships in a port:</p>
+                <ol class="list-decimal list-inside space-y-3 text-gray-700 font-medium">
+                    <li>The Greek ship leaves at six and carries coffee.</li>
+                    <li>The ship in the middle has a black chimney.</li>
+                    <li>The English ship leaves at nine.</li>
+                    <li>The French ship with a blue chimney is to the left of a ship that carries coffee.</li>
+                    <li>To the right of the ship carrying cocoa is a ship going to Marseille.</li>
+                    <li>The Brazilian ship is heading for Manila.</li>
+                    <li>Next to the ship carrying rice is a ship with a green chimney.</li>
+                    <li>A ship going to Genoa leaves at five.</li>
+                    <li>The Spanish ship leaves at seven and is to the right of the ship going to Marseille.</li>
+                    <li>The ship with a red chimney goes to Hamburg.</li>
+                    <li>Next to the ship leaving at seven is a ship with a white chimney.</li>
+                    <li>The ship on the border carries corn.</li>
+                    <li>The ship with a black chimney leaves at eight.</li>
+                    <li>The ship carrying corn is anchored next to the ship carrying rice.</li>
+                    <li>The ship going to Hamburg leaves at six.</li>
+                </ol>
+                <div class="mt-6 p-4 bg-indigo-100 rounded-lg text-indigo-900 font-bold">
+                    Which ship goes to Port Said? Which ship carries tea?
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="ml-5">
-      <p class="text-xl font-semibold">There are 5 ships in a port:</p>
-      <ol class="text-xl list-decimal list-inside space-y-2 font-semibold">
-        <li>The Greek ship leaves at six and carries coffee.</li>
-        <li>The ship in the middle has a black chimney.</li>
-        <li>The English ship leaves at nine.</li>
-        <li>
-          The French ship with a blue chimney is to the left of a ship that
-          carries coffee.
-        </li>
-        <li>
-          To the right of the ship carrying cocoa is a ship going to Marseille.
-        </li>
-        <li>The Brazilian ship is heading for Manila.</li>
-        <li>Next to the ship carrying rice is a ship with a green chimney.</li>
-        <li>A ship going to Genoa leaves at five.</li>
-        <li>
-          The Spanish ship leaves at seven and is to the right of the ship going
-          to Marseille.
-        </li>
-        <li>The ship with a red chimney goes to Hamburg.</li>
-        <li>
-          Next to the ship leaving at seven is a ship with a white chimney.
-        </li>
-        <li>The ship on the border carries corn.</li>
-        <li>The ship with a black chimney leaves at eight.</li>
-        <li>
-          The ship carrying corn is anchored next to the ship carrying rice.
-        </li>
-        <li>The ship going to Hamburg leaves at six.</li>
-      </ol>
-      <p class="text-xl font-semibold mt-2">
-        Which ship goes to Port Said? Which ship carries tea?
-      </p>
-    </div>
-    <div class="fixed bottom-4 right-6 z-50">
-      <button
-        class="flex flex-col w-16 items-center hover:scale-110 transition-transform duration-300 cursor-pointer"
-        onclick="location.href = 'puzzle.html'"
-      >
-        <img class="w-full" src="https://i.ibb.co/35wVjxkn/icon-next.png" />
-        <p class="text-center">Next</p>
-      </button>
-    </div>
-  </body>
+
+    <div class="fixed bottom-6 right-6 z-50">
+    <button
+      type="button"
+      class="flex flex-col items-center hover:scale-110 transition-transform duration-300 cursor-pointer border-none bg-transparent"
+      onclick="location.href = 'puzzle.html'"
+    >
+      <img 
+        src="https://i.ibb.co/35wVjxkn/icon-next.png" 
+        alt="Next" 
+        class="w-16 h-16 object-contain" 
+      />
+      <p class="font-bold text-gray-700 mt-1">Next</p>
+    </button>
+  </div>
+</body>
 </html>
