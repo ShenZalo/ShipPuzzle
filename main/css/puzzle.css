@@ -1,0 +1,254 @@
+body {
+  background-color: #a8e6ff; /* Deep luxury ocean dark mode */
+  color: #f8fafc;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+}
+
+.section-container {
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  padding: 24px;
+  background-color: #ffffff; /* Sleek dashboard cards backdrop */
+  border-radius: 24px;
+  border: 1px solid #55b6b1;
+  box-shadow: 0 10px 25px -5px rgba(134, 134, 134, 0.3);
+}
+
+h1.title-header {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #38bdf8; /* Calming ocean light cyan line accent */
+}
+
+.instructions h2 {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-align: center;
+  color: #52565a;
+  margin: 0;
+}
+
+/* --- NATIVE OCEAN SWAY ANIMATION MECHANICS --- */
+ocean-sway {
+  display: inline-block;
+  transform-origin: bottom center;
+  animation: oceanFloat 4s ease-in-out infinite;
+}
+
+@keyframes oceanFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(4deg);
+  }
+}
+
+/* --- CORE FLEX ELEMENT GRIDS --- */
+.flex-row-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* --- UNIFIED CARD COMPONENT SCHEME --- */
+.item {
+  width: 128px;
+  height: 128px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+.item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Pill card row refinements (Time, Cargo, Ports) */
+.item.text-pill-card {
+  height: 64px;
+  justify-content: center;
+  background-color: #d9e8e9;
+  border: 2px solid #55d3d3;
+}
+.item.text-pill-card:hover {
+  border-color: #38bdf8;
+  background-color: #409ea5;
+}
+.item.text-pill-card p {
+  color: #000000;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* Dedicated Active Highlight Glow */
+.item.selected-active {
+  outline: 3px solid #38bdf8 !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.6) !important;
+}
+
+/* Internal text label structure for ship assets */
+.text-badge {
+  background-color: #ffffff !important;
+  border-radius: 9999px !important;
+  width: 100%;
+  padding: 5px 4px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+.text-badge p {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+  white-space: normal;
+}
+
+/* --- MODERN ANSWER GRID TABLE STYLING --- */
+table.dashboard-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #ffffff;
+}
+table.dashboard-table th {
+  background-color: #87b4be;
+  color: #ffffff;
+  padding: 14px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #ffffff;
+}
+table.dashboard-table td {
+  background-color: #afcece;
+  border-bottom: 1px solid #a4cfcd;
+  border-right: 1px solid #8eb5b6;
+  height: 112px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+table.dashboard-table td:last-child {
+  border-right: none;
+}
+table.dashboard-table tr:last-child td {
+  border-bottom: none;
+}
+table.dashboard-table td:hover {
+  background-color: #8e9eb9;
+}
+
+/* Flatten nested items when locked into their answer matrix cell slots */
+table.dashboard-table .item {
+  width: 128px !important;
+  height: 128px !important;
+  box-shadow: none !important;
+  margin: 0 auto;
+}
+table.dashboard-table ocean-sway {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: none; /* Stops swaying once docked */
+}
+
+/* --- DASHBOARD LOGIC ACTIONS --- */
+.btn-action-clear {
+  background-color: rgba(236, 222, 222, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s ease;
+}
+.btn-action-clear:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+}
+
+/* --- CONCLUSION DROP-DOWNS MODULES --- */
+.conclusion-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+.conclusion-text {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+select.clean-dropdown {
+  background-color: #334155;
+  color: #ffffff;
+  border: 1px solid #475569;
+  border-radius: 12px;
+  padding: 10px 16px;
+  outline: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+select.clean-dropdown:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+.result-banner {
+  text-align: center;
+  font-weight: 800;
+  font-size: 14px;
+  margin-top: 15px;
+  color: #38bdf8;
+}
