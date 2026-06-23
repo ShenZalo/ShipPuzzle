@@ -3,399 +3,679 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="css/output.css" rel="stylesheet" />
-    <link href="css/answer.css" rel="stylesheet" />
     <title>Ship Puzzle</title>
+    <script src="https://cdn.tailwindcss.com"></script> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #a8e6ff; /* Deep luxury ocean dark mode */
+        color: #f8fafc;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        padding-bottom: 100px;
+        box-sizing: border-box;
+      }
+
+      .section-container {
+        max-width: 800px;
+        margin: 0 auto 30px auto;
+        padding: 24px;
+        background-color: #ffffff; /* Sleek dashboard cards backdrop */
+        border-radius: 24px;
+        border: 1px solid #55b6b1;
+        box-shadow: 0 10px 25px -5px rgba(134, 134, 134, 0.3);
+      }
+
+      h1.title-header {
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 1.25rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #38bdf8; /* Calming ocean light cyan line accent */
+      }
+
+      .instructions h2 {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        text-align: center;
+        color: #52565a;
+        margin: 0;
+      }
+
+      /* --- NATIVE OCEAN SWAY ANIMATION MECHANICS --- */
+      ocean-sway {
+        display: inline-block;
+        transform-origin: bottom center; 
+        animation: oceanFloat 4s ease-in-out infinite; 
+      }
+
+      @keyframes oceanFloat {
+        0%, 100% { transform: translateY(0) rotate(-4deg); }
+        50% { transform: translateY(-8px) rotate(4deg); }
+      }
+
+      /* --- CORE FLEX ELEMENT GRIDS --- */
+      .flex-row-grid {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      /* --- UNIFIED CARD COMPONENT SCHEME --- */
+      .item {
+        width: 128px;
+        height: 128px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        user-select: none;
+      }
+      .item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Pill card row refinements (Time, Cargo, Ports) */
+      .item.text-pill-card {
+        height: 64px;
+        justify-content: center;
+        background-color: #d9e8e9;
+        border: 2px solid #55d3d3;
+      }
+      .item.text-pill-card:hover {
+        border-color: #38bdf8;
+        background-color: #409ea5;
+      }
+      .item.text-pill-card p {
+        color: #000000;
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 0;
+      }
+
+      /* Dedicated Active Highlight Glow */
+      .item.selected-active {
+        outline: 3px solid #38bdf8 !important;
+        outline-offset: 2px;
+        box-shadow: 0 0 15px rgba(56, 189, 248, 0.6) !important;
+      }
+
+      /* Internal text label structure for ship assets */
+      .text-badge {
+        background-color: #ffffff !important; 
+        border-radius: 9999px !important; 
+        width: 100%; 
+        padding: 5px 4px; 
+        box-sizing: border-box; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        margin-bottom: 2px; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      }
+      .text-badge p {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        font-size: 10px; 
+        font-weight: 900; 
+        text-transform: uppercase; 
+        letter-spacing: 0.5px; 
+        text-align: center; 
+        margin: 0; 
+        padding: 0; 
+        line-height: 1.1; 
+        white-space: normal;
+      }
+
+      /* --- MODERN ANSWER GRID TABLE STYLING --- */
+      table.dashboard-table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #ffffff;
+      }
+      table.dashboard-table th {
+        background-color: #87b4be;
+        color: #ffffff;
+        padding: 14px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #ffffff;
+      }
+      table.dashboard-table td {
+        background-color: #afcece;
+        border-bottom: 1px solid #a4cfcd;
+        border-right: 1px solid #8eb5b6;
+        height: 112px;
+        text-align: center;
+        vertical-align: middle;
+        padding: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      table.dashboard-table td:last-child { border-right: none; }
+      table.dashboard-table tr:last-child td { border-bottom: none; }
+      table.dashboard-table td:hover { background-color: #8e9eb9; }
+
+      /* Flatten nested items when locked into their answer matrix cell slots */
+      table.dashboard-table .item {
+          width: 128px !important;
+          height: 128px !important;
+          box-shadow: none !important;
+          margin: 0 auto;
+      }
+      table.dashboard-table ocean-sway {
+        display: block;
+        width: 100%;
+        height: 100%;
+        animation: none; /* Stops swaying once docked */
+      }
+
+      /* --- DASHBOARD LOGIC ACTIONS --- */
+      .btn-action-clear {
+        background-color: rgba(236, 222, 222, 0.1);
+        color: #ef4444;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 8px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        margin-top: 12px;
+        transition: all 0.2s ease;
+      }
+      .btn-action-clear:hover {
+        background-color: #ef4444;
+        color: #ffffff;
+        border-color: #ef4444;
+      }
+
+      /* --- CONCLUSION DROP-DOWNS MODULES --- */
+      .conclusion-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 20px;
+      }
+      .conclusion-text {
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #94a3b8;
+        letter-spacing: 0.5px;
+      }
+      select.clean-dropdown {
+        background-color: #334155;
+        color: #ffffff;
+        border: 1px solid #475569;
+        border-radius: 12px;
+        padding: 10px 16px;
+        outline: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      select.clean-dropdown:focus {
+        border-color: #38bdf8;
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+      }
+      .result-banner {
+        text-align: center;
+        font-weight: 800;
+        font-size: 14px;
+        margin-top: 15px;
+        color: #38bdf8;
+      }
+
+    </style>
   </head>
-  <body class="bg-blue-300">
-    <!-- Instructions -->
-    <div class="flex flex-col justify-center w-full items-center">
-      <h2 class="text-xl text-center font-bold">
-        Use the 15 clues to figure out the correct information for each ship and
-        then put them into the correct columns.<br />Click on the items in the
-        box below to select them and then click on the correct column on the
-        table at the bottom to place them.
+  <body>
+    <div class="section-container instructions">
+      <h2>
+        Use the 15 clues to figure out the correct information for each ship and then put them into the correct columns.<br />
+        Click on an item in the selection grid below, then click a target grid cell on the table to position it.
       </h2>
     </div>
-    <!-- Selection -->
-    <section id="selection">
-      <h1 class="flex font-extrabold justify-center mt-5">SELECTION</h1>
-      <div class="p-4 border-2 mt-2 mx-4 flex flex-col">
-        <!-- Select Ship Chimney Color -->
-        <div class="flex flex-row w-full justify-between">
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <img
-              src="https://i.ibb.co/Q3CDD427/ship-black.png"
-              alt="ship black"
-              border="0"
-            />
-            <p class="text-sm">Black chimney ship</p>
+
+    <!-- Selection Panel Wrapper: Added id="selection" back onto the container box -->
+    <section id="selection" class="section-container" style="visibility:hidden;">
+      <h1 class="title-header">Selection Board</h1>
+      
+      <!-- Row 1: The Fleet Matrix (Ships) -->
+      <div class="flex-row-grid">
+        <ocean-sway>
+          <div onclick="selectItem(this)" style="background-color: #020617 !important; border: 4px solid #020617 !important;" class="item" data-type="ship" data-value="Black">
+            <img src="https://i.ibb.co/Q3CDD427/ship-black.png" alt="ship black" style="width: 100px; height: 100px; object-fit: contain;" />
+            <div class="text-badge"><p style="color: #020617 !important;">Black Chimney Ship</p></div>
           </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <img
-              src="https://i.ibb.co/1tjWh2M9/ship-red.png"
-              alt="ship red"
-              border="0"
-            />
-            <p class="text-sm">Red chimney ship</p>
+        </ocean-sway>
+        
+        <ocean-sway style="animation-delay: -0.5s;">
+          <div onclick="selectItem(this)" style="background-color: #ef4444 !important; border: 4px solid #ef4444 !important;" class="item" data-type="ship" data-value="Red">
+            <img src="https://i.ibb.co/1tjWh2M9/ship-red.png" alt="ship red" style="width: 100px; height: 100px; object-fit: contain;" />
+            <div class="text-badge"><p style="color: #ef4444 !important;">Red Chimney Ship</p></div>
           </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <img
-              src="https://i.ibb.co/21pTcYwf/ship-blue.png"
-              alt="ship blue"
-              border="0"
-            />
-            <p class="text-sm">Blue chimney ship</p>
+        </ocean-sway>
+
+        <ocean-sway style="animation-delay: -1s;">
+          <div onclick="selectItem(this)" style="background-color: #3b82f6 !important; border: 4px solid #3b82f6 !important;" class="item" data-type="ship" data-value="Blue">
+            <img src="https://i.ibb.co/21pTcYwf/ship-blue.png" alt="ship blue" style="width: 100px; height: 100px; object-fit: contain;" />
+            <div class="text-badge"><p style="color: #3b82f6 !important;">Blue Chimney Ship</p></div>
           </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <img
-              src="https://i.ibb.co/fYCmc5Ph/ship-white.png"
-              alt="ship white"
-              border="0"
-            />
-            <p class="text-sm">White chimney ship</p>
+        </ocean-sway>
+
+        <ocean-sway style="animation-delay: -1.5s;">
+          <div onclick="selectItem(this)" style="background-color: #cbd5e1 !important; border: 4px solid #ffffff !important;" class="item" data-type="ship" data-value="White">
+            <img src="https://i.ibb.co/fYCmc5Ph/ship-white.png" alt="ship white" style="width: 100px; height: 100px; object-fit: contain;" />
+            <div class="text-badge"><p style="color: #475569 !important;">White Chimney Ship</p></div>
           </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-32 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <img
-              src="https://i.ibb.co/pjQyfqgG/ship-green.png"
-              alt="ship green"
-              border="0"
-            />
-            <p class="text-sm">Green chimney ship</p>
+        </ocean-sway>
+
+        <ocean-sway style="animation-delay: -2s;">
+          <div onclick="selectItem(this)" style="background-color: #10b981 !important; border: 4px solid #10b981 !important;" class="item" data-type="ship" data-value="Green">
+            <img src="https://i.ibb.co/pjQyfqgG/ship-green.png" alt="ship green" style="width: 100px; height: 100px; object-fit: contain;" />
+            <div class="text-badge"><p style="color: #10b981 !important;">Green Chimney Ship</p></div>
           </div>
-        </div>
-        <!-- Select Ship Departure Time -->
-        <div class="flex flex-row w-full justify-between mt-5">
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">5.00</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">6.00</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">7.00</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">8.00</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">9.00</p>
-          </div>
-        </div>
-        <!-- Select Ship Country -->
-        <div class="flex flex-row w-full justify-between mt-5">
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">French</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Greek</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Brazillian</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">English</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Spanish</p>
-          </div>
-        </div>
-        <!-- Select Item Each Ship Are Carrying-->
-        <div class="flex flex-row w-full justify-between mt-5">
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Coffee</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Tea</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Cocoa</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Rice</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Corn</p>
-          </div>
-        </div>
-        <!-- Select Ship Destination -->
-        <div class="flex flex-row w-full justify-between mt-5">
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Hamburg</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Genoa</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Manila</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Port Said</p>
-          </div>
-          <div
-            onclick="selectItem(this)"
-            class="item border-dotted rounded-2xl border-2 w-32 h-16 flex flex-col items-center justify-center hover:cursor-pointer transition-transform duration-300"
-          >
-            <p class="text-sm">Marseille</p>
-          </div>
-        </div>
+        </ocean-sway>
+      </div>
+
+      <!-- Row 2: Departure Arrays (Ensured data-value matches text formatting) -->
+      <div class="flex-row-grid">
+        <ocean-sway><div onclick="selectItem(this)" class="item text-pill-card" data-type="time" data-value="5.00"><p>5.00</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -0.5s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="time" data-value="6.00"><p>6.00</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -1s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="time" data-value="7.00"><p>7.00</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -1.5s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="time" data-value="8.00"><p>8.00</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -2s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="time" data-value="9.00"><p>9.00</p></div></ocean-sway>
+      </div>
+
+      <!-- Row 3: National Flags -->
+      <div class="flex-row-grid">
+        <ocean-sway><div onclick="selectItem(this)" class="item text-pill-card" data-type="country" data-value="French"><p>French</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -0.5s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="country" data-value="Greek"><p>Greek</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -1s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="country" data-value="Brazilian"><p>Brazilian</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -1.5s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="country" data-value="English"><p>English</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -2s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="country" data-value="Spanish"><p>Spanish</p></div></ocean-sway>
+      </div>
+
+      <!-- Row 4: Freight Cargo -->
+      <div class="flex-row-grid">
+        <ocean-sway><div onclick="selectItem(this)" class="item text-pill-card" data-type="item" data-value="Coffee"><p>Coffee</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -0.5s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="item" data-value="Tea"><p>Tea</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -1s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="item" data-value="Cocoa"><p>Cocoa</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -1.5s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="item" data-value="Rice"><p>Rice</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -2s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="item" data-value="Corn"><p>Corn</p></div></ocean-sway>
+      </div>
+
+      <!-- Row 5: Destination Harbors -->
+      <div class="flex-row-grid">
+        <ocean-sway><div onclick="selectItem(this)" class="item text-pill-card" data-type="destination" data-value="Hamburg"><p>Hamburg</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -0.5s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="destination" data-value="Genoa"><p>Genoa</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -1s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="destination" data-value="Manila"><p>Manila</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -1.5s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="destination" data-value="Port Said"><p>Port Said</p></div></ocean-sway>
+        <ocean-sway style="animation-delay: -2s;"><div onclick="selectItem(this)" class="item text-pill-card" data-type="destination" data-value="Marseille"><p>Marseille</p></div></ocean-sway>
       </div>
     </section>
-
-    <section id="answer" class="p-4 border-2 mt-5 mb-20 mx-4">
-      <h1 class="flex font-extrabold justify-center">ANSWER</h1>
-      <table
-        class="w-full mt-5 table-fixed border-collapse border-2 border-black"
-      >
+       
+    <!-- Answer Sheet Matrix Container -->
+    <section class="section-container">
+      <h1 class="title-header">Answer Matrix</h1>
+      <table class="dashboard-table">
         <thead>
           <tr>
-            <th class="border-2 border-black p-2">Ship</th>
-            <th class="border-2 border-black p-2">Departure Time</th>
-            <th class="border-2 border-black p-2">Country</th>
-            <th class="border-2 border-black p-2">Item</th>
-            <th class="border-2 border-black p-2">Destination</th>
+            <th style="text-align:center;">Ship</th>
+            <th style="text-align:center;">Departure</th>
+            <th style="text-align:center;">Country</th>
+            <th style="text-align:center;">Cargo Item</th>
+            <th style="text-align:center;">Destination</th>
           </tr>
         </thead>
         <tbody id="answer-body">
-          <tr>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
+          <tr data-row="1">
+            <td onclick="targetCellClick(this)" data-col="ship"></td>
+            <td onclick="targetCellClick(this)" data-col="time"></td>
+            <td onclick="targetCellClick(this)" data-col="country"></td>
+            <td onclick="targetCellClick(this)" data-col="item"></td>
+            <td onclick="targetCellClick(this)" data-col="destination"></td>
           </tr>
-          <tr>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
+          <tr data-row="2">
+            <td onclick="targetCellClick(this)" data-col="ship"></td>
+            <td onclick="targetCellClick(this)" data-col="time"></td>
+            <td onclick="targetCellClick(this)" data-col="country"></td>
+            <td onclick="targetCellClick(this)" data-col="item"></td>
+            <td onclick="targetCellClick(this)" data-col="destination"></td>
           </tr>
-          <tr>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
+          <tr data-row="3">
+            <td onclick="targetCellClick(this)" data-col="ship"></td>
+            <td onclick="targetCellClick(this)" data-col="time"></td>
+            <td onclick="targetCellClick(this)" data-col="country"></td>
+            <td onclick="targetCellClick(this)" data-col="item"></td>
+            <td onclick="targetCellClick(this)" data-col="destination"></td>
           </tr>
-          <tr>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
+          <tr data-row="4">
+            <td onclick="targetCellClick(this)" data-col="ship"></td>
+            <td onclick="targetCellClick(this)" data-col="time"></td>
+            <td onclick="targetCellClick(this)" data-col="country"></td>
+            <td onclick="targetCellClick(this)" data-col="item"></td>
+            <td onclick="targetCellClick(this)" data-col="destination"></td>
           </tr>
-          <tr>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
-            <td
-              class="border-2 border-black h-32 text-center align-middle"
-            ></td>
+          <tr data-row="5">
+            <td onclick="targetCellClick(this)" data-col="ship"></td>
+            <td onclick="targetCellClick(this)" data-col="time"></td>
+            <td onclick="targetCellClick(this)" data-col="country"></td>
+            <td onclick="targetCellClick(this)" data-col="item"></td>
+            <td onclick="targetCellClick(this)" data-col="destination"></td>
           </tr>
         </tbody>
       </table>
-      <div class="flex flex-row justify-end">
-        <button
-          class="mt-2 border-2 border-black bg-red-600 text-white rounded-2xl p-2 flex flex-row justify-center w-16 items-center hover:scale-110 transition-transform duration-300 cursor-pointer"
-          onclick="clearTable()"
-        >
-          <p class="text-center">Clear</p>
-        </button>
+      <div style="display: flex; justify-content: flex-end;">
+        <button class="btn-action-clear" onclick="clearTable()">Clear Grid</button>
       </div>
     </section>
 
-    <!-- Conclusion -->
-    <section id="conclusion" class="mb-10">
-      <div class="text-center font-extrabold text-4xl mt-5">
-        Which ship goes to Port Said? Which ship carries tea?<br />
-        Draw a conclusion!
+    <!-- Logic Deduction Logic Input -->
+    <section class="section-container">
+      <h1 class="title-header">Deduction Conclusion</h1>
+      <div style="text-align: center; font-size: 15px; font-weight: 700; margin-bottom: 15px; color: #cbd5e1;">
+        Which ship goes to Port Said? Which ship carries tea?
       </div>
-
-      <div class="line">
-        <div class="dots" aria-hidden="true"><i></i></div>
-
-        <div class="select-wrap">
-          <select
-            class="select"
-            id="portSaidSelect"
-            aria-label="Ship going to Port Said"
-          >
-            <option value="" selected>-</option>
-            <option value="Greek">Greek ship</option>
-            <option value="French">French ship</option>
-            <option value="English">English ship</option>
-            <option value="Brazilian">Brazilian ship</option>
-            <option value="Spanish">Spanish ship</option>
-          </select>
-          <span class="arrow" aria-hidden="true"></span>
-        </div>
-
-        <div>goes to Port said AND</div>
-
-        <div class="select-wrap">
-          <select class="select" id="teaSelect" aria-label="Ship carrying tea">
-            <option value="" selected>-</option>
-            <option value="Greek">Greek ship</option>
-            <option value="French">French ship</option>
-            <option value="English">English ship</option>
-            <option value="Brazilian">Brazilian ship</option>
-            <option value="Spanish">Spanish ship</option>
-          </select>
-          <span class="arrow" aria-hidden="true"></span>
-        </div>
-
-        <div>carries tea</div>
+      <div class="conclusion-wrapper">
+        <select class="clean-dropdown" id="portSaidSelect" aria-label="Ship going to Port Said">
+          <option value="" selected>Select Ship...</option>
+          <option value="Greek">Greek ship</option>
+          <option value="French">French ship</option>
+          <option value="English">English ship</option>
+          <option value="Brazilian">Brazilian ship</option>
+          <option value="Spanish">Spanish ship</option>
+        </select>
+        <span class="conclusion-text">goes to Port Said and</span>
+        <select class="clean-dropdown" id="teaSelect" aria-label="Ship carrying tea">
+          <option value="" selected>Select Ship...</option>
+          <option value="Greek">Greek ship</option>
+          <option value="French">French ship</option>
+          <option value="English">English ship</option>
+          <option value="Brazilian">Brazilian ship</option>
+          <option value="Spanish">Spanish ship</option>
+        </select>
+        <span class="conclusion-text">carries tea</span>
       </div>
-
-      <div class="result" id="resultMessage" aria-live="polite"></div>
+      <div class="result-banner" id="resultMessage" aria-live="polite"></div>
     </section>
-    <!-- Navigation Buttons -->
-    <div class="w-full">
-      <div class="fixed bottom-4 left-6 z-50">
-        <button
-          class="flex flex-col w-16 items-center hover:scale-110 transition-transform duration-300 cursor-pointer"
-          onclick="location.href = 'instruction.html'"
-        >
-          <img
-            class="scale-x-[-1] w-full"
-            src="https://i.ibb.co/35wVjxkn/icon-next.png"
-          />
-          <p class="text-center">Previous</p>
-        </button>
-      </div>
-      <div class="fixed bottom-4 right-6 z-50">
-        <button
-          class="flex flex-col w-16 items-center hover:scale-110 transition-transform duration-300 cursor-pointer"
-          onclick="submitAnswer()"
-        >
-          <img class="w-full" src="https://i.ibb.co/tMLr4C8p/icon-done.png" />
-          <p class="text-center">SUBMIT</p>
-        </button>
-      </div>
+
+    <!-- UI Sticky Navigation Controls -->
+    <!-- Previous -->
+    <div class="fixed bottom-6 left-6 z-50">
+      <button
+        type="button"
+        class="flex flex-col items-center hover:scale-110 transition-transform duration-300 cursor-pointer border-none bg-transparent"
+        onclick="saveAndGoBack()"
+      >
+        <img
+          src="https://i.ibb.co/35wVjxkn/icon-next.png"
+          alt="Previous"
+          class="w-16 h-16 object-contain -scale-x-100"
+        />
+        <p class="font-bold text-gray-700 mt-1">Previous</p>
+      </button>
     </div>
+
+    <!-- Submit -->
+    <div class="fixed bottom-6 right-6 z-50">
+      <button
+        type="button"
+        class="flex flex-col items-center hover:scale-110 transition-transform duration-300 cursor-pointer border-none bg-transparent"
+        onclick="submitAnswer()"
+      >
+        <img
+          src="https://i.ibb.co/35wVjxkn/icon-next.png"
+          alt="Submit"
+          class="w-16 h-16 object-contain"
+        />
+        <p class="font-bold text-gray-700 mt-1">Submit</p>
+      </button>
+    </div>
+
+    <!-- --- CORE INTERACTIVE GAMEPLAY JAVASCRIPT --- -->
+    <script>
+      let currentSelectedElement = null;
+
+      document.addEventListener('DOMContentLoaded', loadGameState);
+      window.addEventListener('pageshow', loadGameState);
+
+      function selectItem(element) {
+        event.stopPropagation();
+        if (currentSelectedElement) {
+          currentSelectedElement.classList.remove('selected-active');
+        }
+        currentSelectedElement = element;
+        currentSelectedElement.classList.add('selected-active');
+      }
+
+      function targetCellClick(cell) {
+        // REMOVAL LOGIC: Click a filled cell to clear it and return item to selection board
+        if (!currentSelectedElement) {
+          if (cell.innerHTML !== '') {
+            const storedVal = cell.querySelector('.item').getAttribute('data-stored-value');
+            const storedType = cell.querySelector('.item').getAttribute('data-type');
+            
+            const selectionBoardItem = document.querySelector(`#selection .item[data-type="${storedType}"][data-value="${storedVal}"]`);
+            if (selectionBoardItem) {
+              selectionBoardItem.parentElement.style.visibility = 'visible'; 
+            }
+
+            cell.innerHTML = '';
+            saveGameState(); 
+          }
+          return;
+        }
+
+        const expectedType = cell.getAttribute('data-col');
+        const activeType = currentSelectedElement.getAttribute('data-type');
+
+        if (expectedType !== activeType) {
+          alert(`Invalid Placement: This column only accepts ${expectedType} tokens.`);
+          return;
+        }
+
+        // If the cell already has an item, restore the old item to the board first
+        if (cell.innerHTML !== '') {
+          const oldVal = cell.querySelector('.item').getAttribute('data-stored-value');
+          const oldType = cell.querySelector('.item').getAttribute('data-type');
+          const oldBoardItem = document.querySelector(`#selection .item[data-type="${oldType}"][data-value="${oldVal}"]`);
+          if (oldBoardItem) {
+            oldBoardItem.parentElement.style.visibility = 'visible';
+          }
+        }
+
+        cell.innerHTML = '';
+
+        const itemVal = currentSelectedElement.getAttribute('data-value');
+        const clonedNode = currentSelectedElement.cloneNode(true);
+        clonedNode.classList.remove('selected-active');
+        clonedNode.removeAttribute('onclick');
+        clonedNode.setAttribute('data-stored-value', itemVal);
+
+        cell.appendChild(clonedNode);
+
+        // Hide item from the choice pool immediately
+        currentSelectedElement.parentElement.style.visibility = 'hidden';
+
+        currentSelectedElement.classList.remove('selected-active');
+        currentSelectedElement = null;
+
+        saveGameState();
+      }
+
+      function saveGameState() {
+        const gridState = [];
+        const cells = document.querySelectorAll('.dashboard-table tbody tr td');
+        
+        cells.forEach((cell, index) => {
+          if (cell.innerHTML.trim() !== '') {
+            const nestedItem = cell.querySelector('.item');
+            gridState.push({
+              cellIndex: index,
+              htmlContent: cell.innerHTML,
+              val: nestedItem.getAttribute('data-stored-value'),
+              type: nestedItem.getAttribute('data-type')
+            });
+          }
+        });
+
+        localStorage.setItem('shipPuzzleGrid', JSON.stringify(gridState));
+        localStorage.setItem('shipPuzzlePortSaid', document.getElementById('portSaidSelect').value);
+        localStorage.setItem('shipPuzzleTea', document.getElementById('teaSelect').value);
+      }
+
+      function loadGameState() {
+      const savedGrid = localStorage.getItem('shipPuzzleGrid');
+      const savedPort = localStorage.getItem('shipPuzzlePortSaid');
+      const savedTea = localStorage.getItem('shipPuzzleTea');
+      const cells = document.querySelectorAll('.dashboard-table tbody tr td');
+
+      // 1. Wipe out table cell contents first
+      cells.forEach(cell => cell.innerHTML = '');
+
+      // 2. Track which items have been used in the answer matrix table
+      const usedItems = new Set();
+
+      if (savedGrid) {
+        const gridState = JSON.parse(savedGrid);
+        gridState.forEach(savedItem => {
+          if (cells[savedItem.cellIndex]) {
+            cells[savedItem.cellIndex].innerHTML = savedItem.htmlContent;
+            
+            // Remove selection behavior once the item is inside the table cell
+            const nestedCard = cells[savedItem.cellIndex].querySelector('.item');
+            if (nestedCard) {
+              nestedCard.removeAttribute('onclick');
+            }
+            
+            // Mark this specific card key combination as used (e.g., "ship-Red")
+            usedItems.add(`${savedItem.type}-${savedItem.val}`);
+          }
+        });
+      }
+
+      // 3. Loop through your selection board pool items and show ONLY the unused ones
+      const allSelectionCards = document.querySelectorAll('#selection .item');
+      allSelectionCards.forEach(card => {
+        const cardType = card.getAttribute('data-type');
+        const cardVal = card.getAttribute('data-value');
+        const lookupKey = `${cardType}-${cardVal}`;
+
+        // If the item key isn't in our used list, make it visible instantly
+        if (!usedItems.has(lookupKey)) {
+          card.parentElement.style.visibility = 'visible';
+        } else {
+          card.parentElement.style.visibility = 'hidden';
+        }
+      });
+
+      if (savedPort) document.getElementById('portSaidSelect').value = savedPort;
+      if (savedTea) document.getElementById('teaSelect').value = savedTea;
+
+      // Show selection board only after everything is restored
+      const selectionBoard = document.getElementById('selection');
+      if (selectionBoard) {
+          selectionBoard.style.visibility = 'visible';
+      }
+    }
+
+
+      function saveAndGoBack() {
+        saveGameState();
+        window.location.href = 'instruction.html';
+      }
+
+      function clearTable() {
+        const cells = document.querySelectorAll('.dashboard-table td');
+        cells.forEach(cell => cell.innerHTML = '');
+        
+        // Make the entire pool visible again instantly
+        const selectionItems = document.querySelectorAll('#selection ocean-sway');
+        selectionItems.forEach(item => item.style.visibility = 'visible');
+
+        document.getElementById('portSaidSelect').value = '';
+        document.getElementById('teaSelect').value = '';
+        document.getElementById('resultMessage').innerText = '';
+        
+        if (currentSelectedElement) {
+          currentSelectedElement.classList.remove('selected-active');
+          currentSelectedElement = null;
+        }
+
+        localStorage.removeItem('shipPuzzleGrid');
+        localStorage.removeItem('shipPuzzlePortSaid');
+        localStorage.removeItem('shipPuzzleTea');
+      }
+
+
+      function submitAnswer() {
+        const portAnswer = document.getElementById('portSaidSelect').value;
+        const teaAnswer = document.getElementById('teaSelect').value;
+        const banner = document.getElementById('resultMessage');
+
+        // Check if all 25 cells are filled
+        const cells = document.querySelectorAll('.dashboard-table tbody td');
+        const allFilled = [...cells].every(cell => cell.innerHTML.trim() !== '');
+
+        if (!allFilled) {
+            banner.style.color = '#ef4444';
+            banner.innerText = '❌ Please complete the entire Answer Matrix before submitting.';
+            return;
+        }
+
+        // Check dropdowns
+        if (!portAnswer || !teaAnswer) {
+            banner.style.color = '#ef4444';
+            banner.innerText = '❌ Please answer both deduction questions.';
+            return;
+        }
+
+        if (portAnswer === 'Spanish' && teaAnswer === 'French') {
+            banner.style.color = '#10b981';
+            banner.innerText = '🎉 Brilliant! Your puzzle deductions match the nautical logs perfectly!';
+
+            localStorage.removeItem('shipPuzzleGrid');
+            localStorage.removeItem('shipPuzzlePortSaid');
+            localStorage.removeItem('shipPuzzleTea');
+
+            setTimeout(() => {
+                window.location.href = "congratulation.html";
+            }, 1000);
+
+        } else {
+            banner.style.color = '#ef4444';
+            banner.innerText = '❌ That does not match the 15 puzzle logs. Check your grid positions and try again!';
+
+            setTimeout(() => {
+                window.location.href = "retry.html";
+            }, 1000);
+        }
+    }
+    </script>
   </body>
-  <script src="js/selection.js"></script>
-  <script src="js/answer.js"></script>
 </html>
