@@ -87,7 +87,7 @@ ocean-sway {
 
 /* Pill card row refinements (Time, Cargo, Ports) */
 .item.text-pill-card {
-  height: 64px;
+  height: 88px;
   justify-content: center;
   background-color: #d9e8e9;
   border: 2px solid #55d3d3;
