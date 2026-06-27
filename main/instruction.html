@@ -44,40 +44,98 @@
           >
             There are 5 ships in a port:
           </p>
-          <ol
-            class="list-decimal list-inside space-y-3 text-gray-700 font-medium"
-          >
-            <li>The Greek ship leaves at six and carries coffee.</li>
-            <li>The ship in the middle has a black chimney.</li>
-            <li>The English ship leaves at nine.</li>
-            <li>
-              The French ship with a blue chimney is to the left of a ship that
-              carries coffee.
-            </li>
-            <li>
-              To the right of the ship carrying cocoa is a ship going to
-              Marseille.
-            </li>
-            <li>The Brazilian ship is heading for Manila.</li>
-            <li>
-              Next to the ship carrying rice is a ship with a green chimney.
-            </li>
-            <li>A ship going to Genoa leaves at five.</li>
-            <li>
-              The Spanish ship leaves at seven and is to the right of the ship
-              going to Marseille.
-            </li>
-            <li>The ship with a red chimney goes to Hamburg.</li>
-            <li>
-              Next to the ship leaving at seven is a ship with a white chimney.
-            </li>
-            <li>The ship on the border carries corn.</li>
-            <li>The ship with a black chimney leaves at eight.</li>
-            <li>
-              The ship carrying corn is anchored next to the ship carrying rice.
-            </li>
-            <li>The ship going to Hamburg leaves at six.</li>
-          </ol>
+          <ol class="list-none space-y-3 text-gray-700 font-medium">
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue1" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>The Greek ship leaves at six and carries coffee.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue2" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>The ship in the middle has a black chimney.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue3" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>The English ship leaves at nine.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue4" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>The French ship with a blue chimney is to the left of a ship that carries coffee.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue5" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>To the right of the ship carrying cocoa is a ship going to Marseille.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue6" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>The Brazilian ship is heading for Manila.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue7" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>Next to the ship carrying rice is a ship with a green chimney.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue8" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>A ship going to Genoa leaves at five.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue9" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>The Spanish ship leaves at seven and is to the right of the ship going to Marseille.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue10" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>The ship with a red chimney goes to Hamburg.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue11" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>Next to the ship leaving at seven is a ship with a white chimney.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue12" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>The ship on the border carries corn.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue13" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>The ship with a black chimney leaves at eight.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue14" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>The ship carrying corn is anchored next to the ship carrying rice.</span>
+            </label>
+          </li>
+          <li>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="clue15" class="clue-checkbox mt-1 w-5 h-5 accent-indigo-600">
+              <span>The ship going to Hamburg leaves at six.</span>
+            </label>
+          </li>
+        </ol>
           <div
             class="mt-6 p-4 bg-indigo-100 rounded-lg text-indigo-900 font-bold"
           >
@@ -103,3 +161,24 @@
     </div>
   </body>
 </html>
+<script>
+  // Select all checkboxes with the class 'clue-checkbox'
+  const checkboxes = document.querySelectorAll('.clue-checkbox');
+
+  // Load saved state on page load
+  window.addEventListener('load', () => {
+    checkboxes.forEach(checkbox => {
+      const savedState = localStorage.getItem(checkbox.id);
+      if (savedState === 'true') {
+        checkbox.checked = true;
+      }
+    });
+  });
+
+  // Save state whenever a checkbox is toggled
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      localStorage.setItem(checkbox.id, checkbox.checked);
+    });
+  });
+</script>
