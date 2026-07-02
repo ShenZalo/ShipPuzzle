@@ -36,6 +36,44 @@ h1.title-header {
   color: #52565a;
   margin: 0;
 }
+/* Give the Answer Matrix section more room since it now has 6 columns */
+.matrix-section {
+  max-width: 950px;
+}
+
+table.dashboard-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+table.dashboard-table th.row-label {
+  background-color: #87b4be;
+  color: #ffffff;
+  text-align: left;
+  padding: 8px 6px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 110px;
+}
+
+table.dashboard-table th.corner-cell {
+  background-color: #87b4be;
+  width: 110px;
+}
+
+table.dashboard-table td {
+  height: auto;
+  padding: 4px;
+}
+
+/* Keep cards at their original full size */
+table.dashboard-table .item {
+  width: 128px !important;
+  height: 128px !important;
+  margin: 0 auto;
+}
 
 /* --- NATIVE OCEAN SWAY ANIMATION MECHANICS --- */
 ocean-sway {

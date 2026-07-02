@@ -460,52 +460,58 @@
     </section>
 
     <!-- Answer Sheet Matrix Container -->
-    <section class="section-container">
+    <section class="section-container matrix-section">
       <h1 class="title-header">Answer Matrix</h1>
       <table class="dashboard-table">
         <thead>
           <tr>
-            <th style="text-align: center">Ship</th>
-            <th style="text-align: center">Departure</th>
-            <th style="text-align: center">Country</th>
-            <th style="text-align: center">Cargo Item</th>
-            <th style="text-align: center">Destination</th>
+            <th class="corner-cell"></th>
+            <th>Ship 1</th>
+            <th>Ship 2</th>
+            <th>Ship 3</th>
+            <th>Ship 4</th>
+            <th>Ship 5</th>
           </tr>
         </thead>
         <tbody id="answer-body">
-          <tr data-row="1">
+          <tr data-row="ship">
+            <th class="row-label">Ship</th>
             <td onclick="targetCellClick(this)" data-col="ship"></td>
-            <td onclick="targetCellClick(this)" data-col="time"></td>
-            <td onclick="targetCellClick(this)" data-col="country"></td>
-            <td onclick="targetCellClick(this)" data-col="item"></td>
-            <td onclick="targetCellClick(this)" data-col="destination"></td>
+            <td onclick="targetCellClick(this)" data-col="ship"></td>
+            <td onclick="targetCellClick(this)" data-col="ship"></td>
+            <td onclick="targetCellClick(this)" data-col="ship"></td>
+            <td onclick="targetCellClick(this)" data-col="ship"></td>
           </tr>
-          <tr data-row="2">
-            <td onclick="targetCellClick(this)" data-col="ship"></td>
+          <tr data-row="time">
+            <th class="row-label">Departure</th>
             <td onclick="targetCellClick(this)" data-col="time"></td>
-            <td onclick="targetCellClick(this)" data-col="country"></td>
-            <td onclick="targetCellClick(this)" data-col="item"></td>
-            <td onclick="targetCellClick(this)" data-col="destination"></td>
+            <td onclick="targetCellClick(this)" data-col="time"></td>
+            <td onclick="targetCellClick(this)" data-col="time"></td>
+            <td onclick="targetCellClick(this)" data-col="time"></td>
+            <td onclick="targetCellClick(this)" data-col="time"></td>
           </tr>
-          <tr data-row="3">
-            <td onclick="targetCellClick(this)" data-col="ship"></td>
-            <td onclick="targetCellClick(this)" data-col="time"></td>
+          <tr data-row="country">
+            <th class="row-label">Country</th>
             <td onclick="targetCellClick(this)" data-col="country"></td>
-            <td onclick="targetCellClick(this)" data-col="item"></td>
-            <td onclick="targetCellClick(this)" data-col="destination"></td>
+            <td onclick="targetCellClick(this)" data-col="country"></td>
+            <td onclick="targetCellClick(this)" data-col="country"></td>
+            <td onclick="targetCellClick(this)" data-col="country"></td>
+            <td onclick="targetCellClick(this)" data-col="country"></td>
           </tr>
-          <tr data-row="4">
-            <td onclick="targetCellClick(this)" data-col="ship"></td>
-            <td onclick="targetCellClick(this)" data-col="time"></td>
-            <td onclick="targetCellClick(this)" data-col="country"></td>
+          <tr data-row="item">
+            <th class="row-label">Cargo Item</th>
             <td onclick="targetCellClick(this)" data-col="item"></td>
-            <td onclick="targetCellClick(this)" data-col="destination"></td>
+            <td onclick="targetCellClick(this)" data-col="item"></td>
+            <td onclick="targetCellClick(this)" data-col="item"></td>
+            <td onclick="targetCellClick(this)" data-col="item"></td>
+            <td onclick="targetCellClick(this)" data-col="item"></td>
           </tr>
-          <tr data-row="5">
-            <td onclick="targetCellClick(this)" data-col="ship"></td>
-            <td onclick="targetCellClick(this)" data-col="time"></td>
-            <td onclick="targetCellClick(this)" data-col="country"></td>
-            <td onclick="targetCellClick(this)" data-col="item"></td>
+          <tr data-row="destination">
+            <th class="row-label">Destination</th>
+            <td onclick="targetCellClick(this)" data-col="destination"></td>
+            <td onclick="targetCellClick(this)" data-col="destination"></td>
+            <td onclick="targetCellClick(this)" data-col="destination"></td>
+            <td onclick="targetCellClick(this)" data-col="destination"></td>
             <td onclick="targetCellClick(this)" data-col="destination"></td>
           </tr>
         </tbody>
